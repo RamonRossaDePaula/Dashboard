@@ -16,6 +16,16 @@ import json
 
 # _________________________________________________________________________________
 
+## Importação de dados 1
+
+nomes1 = requests.get("https://servicodados.ibge.gov.br/api/v2/censos/nomes")
+
+nomes1 = nomes1.json()
+
+print("Importação de dados 1: ")
+print(nomes1)
+
+
 ## Código
 
 app = dash.Dash(__name__)
@@ -41,7 +51,7 @@ fig = px.bar(df, x="Nomes", y="Frequência", color="Sexo", barmode="group")
 
 #______________________________________________________________________________________________________
 
-## Layout
+## Layout 1
 
 app.layout = html.Div(children=[                # Children relaciona o que tem dentro da Div do HTML. Neste caso, é uma lista em Python [ ]
     #html.H1(children='Dashboard'),              # Título do dashboard. H1 é título de texto. Pode ser substituído por Markdown
@@ -53,18 +63,29 @@ app.layout = html.Div(children=[                # Children relaciona o que tem d
     # dcc.Markdown('### Relação da quantidade de frutas por cidade'),       # Serve para a mesma função do código acima, porém fica em negrito.
 
     dcc.Graph(id='example-graph', figure=fig),
-
-    dcc.Dropdown(id='dropdown', options=[
-            {'label': 'Porto Alegre', 'value': 'POA'},
-            {'label': 'Torres', 'value': 'TRS'},
-        ],
-        value='POA'
-    ),
-    html.Div(id='dd-output-container')
 ])
 
-
 #______________________________________________________________________________________________________
+
+## Importação de dados 2
+
+nomes2 = requests.get("https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking/?decada=2000")
+
+nomes2 = nomes2.json()
+
+print("Importação de dados 2: ")
+print(nomes2)
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
@@ -78,8 +99,3 @@ if __name__ == '__main__':
 
 
 
-nomes = requests.get("https://servicodados.ibge.gov.br/api/v2/censos/nomes")
-
-nomes = nomes.json()
-
-print(nomes)
