@@ -30,6 +30,11 @@ print(nomes1)
 
 app = dash.Dash(__name__)
 
+colors = {
+    'background': '#111111',
+    'text': '#7FDBFF'
+}
+
 df = pd.DataFrame({
     "Nomes": [ "Maria", "José", "Ana", "João", "Antonio", 
                 "Francisco", "Carlos", "Paulo", "Pedro", "Lucas", 
@@ -53,20 +58,35 @@ fig = px.bar(df, x="Nomes", y="Frequência", color="Sexo", barmode="group")
 
 ## Layout 1
 
-app.layout = html.Div(children=[                # Children relaciona o que tem dentro da Div do HTML. Neste caso, é uma lista em Python [ ]
-    #html.H1(children='Dashboard'),              # Título do dashboard. H1 é título de texto. Pode ser substituído por Markdown
+fig.update_layout(
+    plot_bgcolor=colors['background'],
+    paper_bgcolor=colors['background'],
+    font_color=colors['text']
+)
 
-    dcc.Markdown('# Dashboard'),
+app.layout = html.Div(style={'backgroundColor': colors['background']}, children=[                # Children relaciona o que tem dentro da Div do HTML. Neste caso, é uma lista em Python [ ]
+    html.H1(
+        children='Dashboard',
+        style={
+            'textAlign': 'center',
+            'color': colors['text']             # Título do dashboard. H1 é título de texto. Pode ser substituído por Markdown: "dcc.Markdown('# Dashboard'),"
+        }
+    ),
 
-    html.Div(children='''Relação da frequência de nomes próprios registrados no Brasil na década de 2010 a 2020'''),
+    
+    html.Div(children='''Relação da frequência de nomes próprios registrados no Brasil na década de 2010 a 2020''', style={
+        'textAlign': 'center',
+        'color': colors['text']
+    }),
     
     # dcc.Markdown('### Relação da quantidade de frutas por cidade'),       # Serve para a mesma função do código acima, porém fica em negrito.
 
-    dcc.Graph(id='example-graph', figure=fig),
+    dcc.Graph(id='example-graph', figure=fig)
 ])
 
 #______________________________________________________________________________________________________
 
+"""
 ## Importação de dados 2
 
 nomes2 = requests.get("https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking/?decada=2000")
@@ -74,7 +94,18 @@ nomes2 = requests.get("https://servicodados.ibge.gov.br/api/v2/censos/nomes/rank
 nomes2 = nomes2.json()
 
 print("Importação de dados 2: ")
-print(nomes2)
+print(nomes2)                       # É uma lista
+"""
+
+
+
+
+
+
+
+
+
+
 
 
 
