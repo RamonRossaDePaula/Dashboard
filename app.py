@@ -21,9 +21,9 @@ app = dash.Dash(__name__)
 #______________________________________________________________________________________________________
 
 df = pd.DataFrame({
-    "Frutas": ["Maçãs", "Laranjas", "Bananas", "Maçãs", "Laranjas", "Bananas"],
-    "Quantidade": [4, 1, 2, 2, 4, 5],           # Na ordem de Frutas
-    "Cidade": ["Porto Alegre", "Porto Alegre", "Porto Alegre", "Torres", "Torres", "Torres"]
+    "Frutas": ["Maçãs", "Laranjas", "Bananas", "Uvas", "Maçãs", "Laranjas", "Bananas", "Uvas"],
+    "Quantidade": [4, 1, 2, 5, 2, 4, 5, 1],           # Na ordem de Frutas
+    "Cidade": ["Porto Alegre", "Porto Alegre", "Porto Alegre", "Porto Alegre", "Torres", "Torres", "Torres", "Torres"]
 })
 
 fig = px.bar(df, x="Frutas", y="Quantidade", color="Cidade", barmode="group")
@@ -31,18 +31,31 @@ fig = px.bar(df, x="Frutas", y="Quantidade", color="Cidade", barmode="group")
 #______________________________________________________________________________________________________
 
 
-app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+app.layout = html.Div(children=[                # Children relaciona o que tem dentro da Div do HTML. Neste caso, é uma lista em Python [ ]
+    #html.H1(children='Dashboard'),              # Título do dashboard. H1 é título de texto. Pode ser substituído por Markdown
 
-    html.Div(children='''
-        Dash: A web application framework for your data.
-    '''),
+    dcc.Markdown('# Dashboard'),
 
-    dcc.Graph(
-        id='example-graph',
-        figure=fig
-    )
+    html.Div(children='''Relação da quantidade de frutas por cidade'''),
+    
+    # dcc.Markdown('### Relação da quantidade de frutas por cidade'),       # Serve para a mesma função do código acima, porém fica em negrito.
+
+    dcc.Graph(id='example-graph', figure=fig),
+
+    dcc.Dropdown(id='dropdown',
+        options=[
+            {'label': 'Porto Alegre', 'value': 'POA'},
+            {'label': 'Torres', 'value': 'TRS'},
+        ],
+        value='POA'
+    ),
+    html.Div(id='dd-output-container')
 ])
+
+
+
+#______________________________________________________________________________________________________
+
 
 if __name__ == '__main__':
     app.run_server(debug=True)
