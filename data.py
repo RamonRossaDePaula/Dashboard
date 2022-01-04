@@ -102,23 +102,6 @@ print(nomes2)                       # É uma lista
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run_server(debug=True)
 
