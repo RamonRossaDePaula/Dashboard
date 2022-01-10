@@ -36,7 +36,7 @@ colors = {
 }
 
 df = pd.DataFrame({
-    "Nomes": [ "Maria", "José", "Ana", "João", "Antonio", 
+    "Nomes": [ "Andrey", "José", "Ana", "João", "Antonio", 
                 "Francisco", "Carlos", "Paulo", "Pedro", "Lucas", 
                 "Luiz", "Marcos", "Luis", "Gabriel", "Rafael", 
                 "Francisca", "Daniel", "Marcelo", "Bruno", "Eduardo"],
@@ -84,32 +84,5 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
     dcc.Graph(id='example-graph', figure=fig)
 ])
 
-#______________________________________________________________________________________________________
-
-"""
-## Importação de dados 2
-
-nomes2 = requests.get("https://servicodados.ibge.gov.br/api/v2/censos/nomes/ranking/?decada=2000")
-
-nomes2 = nomes2.json()
-
-print("Importação de dados 2: ")
-print(nomes2)                       # É uma lista
-"""
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run_server(debug=True)
-
-
-
-
-
-# _________________________________________________________________________________
-
-
-
